@@ -1,0 +1,24 @@
+---
+# defaults file for intel_sgx_pws
+
+install_deps:
+   - "gpg-agent"
+   - "apt-transport-https"
+
+intel_sgx_packages:
+  - "libsgx-epid"
+  - "libsgx-quote-ex"
+  - "libsgx-dcap-ql"
+  - "libsgx-urts"
+  - "libsgx-launch"
+
+intel_sgx_debug_packages:
+  - "libsgx-urts-dbgsym"
+  - "libsgx-enclave-common-dbgsym"
+  - "libsgx-dcap-ql-dbgsym"
+  - "libsgx-dcap-default-qpl-dbgsym"
+
+intel_sgx_dev_packages:
+  - "libsgx-enclave-common-dev"
+  - "libsgx-dcap-ql-dev"
+  - "libsgx-dcap-default-qpl-dev"

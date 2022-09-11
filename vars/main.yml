@@ -1,0 +1,5 @@
+---
+# vars file for intel_sgx_pws
+
+install_sgx_debug: true
+install_sgx_dev: true

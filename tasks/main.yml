@@ -1,0 +1,53 @@
+---
+# tasks file for intel_sgx_pws
+
+- name: Include variables
+  ansible.builtin.include_vars:
+    file: main.yml
+
+- name: Install required dependencies
+  ansible.builtin.apt:
+    name: "{{ install_deps }}"
+    state: present
+    update_cache: true
+    install_recommends: false
+  become: true
+
+- name: Add APT repository key
+  ansible.builtin.apt_key:
+    url: "https://download.01.org/intel-sgx/sgx_repo/ubuntu/intel-sgx-deb.key"
+    state: present
+  become: true
+
+- name: Add APT repository
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] https://download.01.org/intel-sgx/sgx_repo/ubuntu {{ ansible_distribution_release }} main"
+    state: present
+    update_cache: true
+  become: true
+
+- name: Install the Intel sgx packages
+  ansible.builtin.apt:
+    name: "{{ intel_sgx_packages }}"
+    state: present
+    update_cache: true
+    install_recommends: false
+  become: true
+
+- name: Install the Intel sgx debug packages
+  ansible.builtin.apt:
+    name: "{{ intel_sgx_debug_packages }}"
+    state: present
+    update_cache: true
+    install_recommends: false
+  become: true
+  when: install_sgx_debug
+
+- name: Install the Intel sgx development packages
+  ansible.builtin.apt:
+    name: "{{ intel_sgx_dev_packages }}"
+    state: present
+    update_cache: true
+    install_recommends: false
+  become: true
+  when: install_sgx_dev
